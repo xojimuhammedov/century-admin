@@ -3,32 +3,27 @@ import { idType } from "@/interFace/interFace";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import { blogDataType } from "@/interFace/apiInterFace";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import UpdateImg from "./UpdateImg";
 import { toast } from "react-toastify";
-import useGlobalContext from "@/hooks/use-context";
 import apiUrl from "@/utils/api";
 interface FormData {
   id:string
   name_uz: string;
   name_en: string;
   name_ru: string;
+  name_tr: string;
   text_uz: string;
   text_en: string;
   text_ru: string;
+  text_tr: string;
   address: string;
   rating: string; 
   images: []
 }
 const BlogUpdateMain = ({ id }: idType) => {
-  const {user,header} = useGlobalContext()
   const [myproduct, setProduct] = useState<FormData>();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [changeImage, setchangeImage] = useState(false);
-  const openModal = () => setModalIsOpen(true);
-  const closeModal = () => setModalIsOpen(false);
   const router = useRouter(); 
  
 
@@ -50,7 +45,6 @@ const BlogUpdateMain = ({ id }: idType) => {
 
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    // setLoading(true);
     const formData = new FormData();
 
     if (data.images && data.images.length) {
@@ -62,10 +56,12 @@ const BlogUpdateMain = ({ id }: idType) => {
       // Append text fields to formData
       formData.append('name_uz', data.name_uz); 
       formData.append('name_en', data.name_en); 
-      formData.append('name_ru', data.name_ru); 
+      formData.append('name_ru', data.name_ru);
+      formData.append('name_tr', data.name_tr); 
       formData.append('text_uz', data.text_uz); 
       formData.append('text_en', data.text_en); 
       formData.append('text_ru', data.text_ru);
+      formData.append('text_tr', data.text_tr);
       formData.append('address', data.address);
       formData.append('rating', data.rating);
 
@@ -167,6 +163,26 @@ const BlogUpdateMain = ({ id }: idType) => {
                 </div>
               </div>
             </div>
+
+            <div className="lg:col-span-4 md:col-span-6 col-span-12">
+              <div className="cashier-select-field mb-5">
+                <h5 className="text-[15px] text-heading font-semibold mb-3">
+                  Hotel nomi - Turk
+                </h5>
+                <div className="cashier-input-field-style">
+                  <div className="single-input-field w-full">
+                    <input
+                      type="text"
+                      defaultValue={myproduct.name_tr}
+                      placeholder="Turk"
+                      {...register("name_tr")}
+                    />
+                    {errors.name_tr && <span>{errors.name_tr.message}</span>}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="lg:col-span-4 md:col-span-6 col-span-12">
               <div className="cashier-select-field mb-5">
                 <h5 className="text-[15px] text-heading font-semibold mb-3">
@@ -220,6 +236,25 @@ const BlogUpdateMain = ({ id }: idType) => {
                       {...register("text_en",  )}
                     />
                     {errors.text_en && <span>{errors.text_en.message}</span>}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 md:col-span-6 col-span-12">
+              <div className="cashier-select-field mb-5">
+                <h5 className="text-[15px] text-heading font-semibold mb-3">
+                  Hotel tavsifi - Turk
+                </h5>
+                <div className="cashier-input-field-style">
+                  <div className="single-input-field w-full">
+                    <input
+                      type="text"
+                      defaultValue={myproduct.text_tr}
+                      placeholder="Turk"
+                      {...register("text_tr",  )}
+                    />
+                    {errors.text_tr && <span>{errors.text_tr.message}</span>}
                   </div>
                 </div>
               </div>
