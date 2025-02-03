@@ -108,37 +108,34 @@ export const menuData: MenuItem[] = [
       },
     ],
   },
-  // {
-  //   id: 7,
-  //   text: "Hududlar bo'yicha",
-  //   icon: PdfIcon,
-  //   submenu: [
-  //     {
-  //       text: "Hamma hududlar",
-  //       link: "/categories",
-  //     },
-  //     {
-  //       text: "Hududlar yaratish",
-  //       link: "/create-categories",
-  //     },
-  //   ],
-  // },
-
-  // {
-  //   id: 8,
-  //   text: "Mashhur binolar bo'yicha",
-  //   icon: PdfIcon,
-  //   submenu: [
-  //     {
-  //       text: "Mashhur binolar",
-  //       link: "/products",
-  //     },
-  //     {
-  //       text: "Mashhur binolar yaratish",
-  //       link: "/create-products",
-  //     },
-  //   ],
-  // },
-
-
+  {
+    id: 7,
+    text: "Hududlar bo'yicha",
+    icon: PdfIcon,
+    submenu: [
+      {
+        text: "Hamma hududlar",
+        link: "/categories",
+      },
+      {
+        text: "Hududlar yaratish",
+        link: "/create-categories",
+      },
+    ],
+  },
+  {
+    id: 8,
+    text: "Mashhur binolar bo'yicha",
+    icon: PdfIcon,
+    submenu: [
+      {
+        text: "Mashhur binolar",
+        link: "/products",
+      },
+      {
+        text: "Mashhur binolar yaratish",
+        link: "/create-products",
+      },
+    ],
+  },
 ];

@@ -17,6 +17,7 @@ export interface DataType {
   name_uz: string;
   name_en: string;
   name_ru: string;
+  name_tr: string;
 }
 
 const BlogList = () => {
@@ -25,10 +26,6 @@ const BlogList = () => {
   const [searchValue, setSearchValue] = useState("");
   const [open, setOpen] = useState<boolean>(false);
   const [match, setMatch] = useState<string>("");
-  const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(10);
-  const [totalPages, setotalPages] = useState<number>(0);
-  const [currentPage, setcurrentPage] = useState<number>(0);
   const handleOpen = (id: string) => {
     setMatch(id);
     setOpen(!open);
@@ -79,33 +76,9 @@ const BlogList = () => {
       .get(`${apiUrl}/cats/`)
       .then((res) => { 
         setBlogs(res.data.data);
-        setotalPages(res.data.totalPages);
-        setcurrentPage(res.data.currentPage);
       })
       .catch((e) => console.log(e));
-  }, [page, limit]);
-  // get search products
-
-  const pageLimitArray = [
-    {
-      id: 1,
-      value: 5,
-    },
-    {
-      id: 2,
-      value: 10,
-    },
-    {
-      id: 3,
-      value: 15,
-    },
-    {
-      id: 4,
-      value: 20,
-    },
-  ];
-
-  const selectHandler = () => {};
+  }, []);
   return (
     <>
       <div className="cashier-content-area mt-[30px] px-7">

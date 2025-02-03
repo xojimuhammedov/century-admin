@@ -6,7 +6,7 @@ const CreateBlog = () => {
     return (
         <>
             <ContentWrapper breadCampTitle='Create Products'>
-             <CreateBlogMain/>
+                <CreateBlogMain />
             </ContentWrapper>
         </>
     );

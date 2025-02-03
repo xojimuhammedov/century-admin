@@ -64,9 +64,6 @@ const BlogUpdateMain = ({ id }: idType) => {
       formData.append('text_tr', data.text_tr);
       formData.append('address', data.address);
       formData.append('rating', data.rating);
-
-
-
     
     axios
       .put(`${apiUrl}/hotels/${id}`, formData,{

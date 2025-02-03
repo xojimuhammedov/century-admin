@@ -1,31 +1,20 @@
 "use client";
-
-import moment from "moment/moment";
 import { toast } from "react-toastify";
-import React, { useState } from "react";
+import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
-import Image from "next/image";
-import useGlobalContext from "@/hooks/use-context"; 
 import apiUrl from "@/utils/api";
- 
-
+import { useRouter } from "next/navigation";
 
 interface FormData {
   name_uz: string;
   name_en: string;
   name_ru: string;
+  name_tr: string;
 }
 
-
-
 const CreateServiceMain = () => {
-  const { user, header } = useGlobalContext();
-  const [upload, setupload] = useState<boolean>(false);
-  const [blogImg, setBlogImg] = useState<string>("");
-  const now = moment();
-  const date = now.format("MM/DD/YY hh:mm a");
-  const [loginError, setloginError] = useState<string>("");
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -33,38 +22,37 @@ const CreateServiceMain = () => {
     formState: { errors },
   } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    
+
 
     const formData = new FormData();
-    
-    formData.append('name_uz', data.name_uz); 
-    formData.append('name_en', data.name_en); 
-    formData.append('name_ru', data.name_ru); 
+
+    formData.append('name_uz', data.name_uz);
+    formData.append('name_en', data.name_en);
+    formData.append('name_ru', data.name_ru);
+    formData.append('name_tr', data.name_tr);
 
     axios
       .post(
         `${apiUrl}/cats/`,
         formData,
         {
-          headers:{
+          headers: {
             "Authorization": `Bearer ${localStorage.getItem('accessToken')}`,
-            "Content-Type":"multipart/form-data", 
+            "Content-Type": "multipart/form-data",
           }
         }
       )
-      .then((res) => { 
+      .then((res) => {
         switch (res.data.message) {
           case "Category was created succesfully!":
             toast.success(`Hudud yaratildi!🎉`, {
               position: "top-left",
             });
             reset();
-            setupload(false);
-            break; 
+            router.push("/categories")
+            break;
           case "custom error":
             reset();
-            setupload(false);
-            setloginError("something is wrong");
             toast.error(`something is wrong`, {
               position: "top-left",
             });
@@ -74,7 +62,7 @@ const CreateServiceMain = () => {
         }
       })
       .catch((error) => {
-        if (error.response.status === 403  || error.response.status === 403) {
+        if (error.response.status === 403 || error.response.status === 403) {
           toast.error(`Qaytadan login qiling!`, {
             position: "top-left",
           });
@@ -85,7 +73,7 @@ const CreateServiceMain = () => {
       });
   };
 
- 
+
 
   return (
     <>
@@ -97,8 +85,8 @@ const CreateServiceMain = () => {
           <h4 className="text-[20px] font-bold text-heading mb-9">
             Hudud yaratish
           </h4>
-          <div className="grid grid-cols-12 gap-x-5"> 
-          <div className="lg:col-span-4 md:col-span-6 col-span-12">
+          <div className="grid grid-cols-12 gap-x-5">
+            <div className="lg:col-span-4 md:col-span-6 col-span-12">
               <div className="cashier-select-field mb-5">
                 <h5 className="text-[15px] text-heading font-semibold mb-3">
                   {" "}
@@ -144,27 +132,50 @@ const CreateServiceMain = () => {
             </div>
 
             <div className="lg:col-span-4 md:col-span-6 col-span-12">
-  <div className="cashier-select-field mb-5">
-    <h5 className="text-[15px] text-heading font-semibold mb-3">
-      {" "}
-      Name (Russian)
-    </h5>
-    <div className="cashier-input-field-style">
-      <div className="single-input-field w-full">
-        <input
-          type="text"
-          placeholder="Name (Russian)"
-          {...register("name_ru", {
-            required: "Name (Russian) is required",
-          })}
-        />
-        {errors.name_ru && (
-          <span>{errors.name_ru.message}</span>
-        )}
-      </div>
-    </div>
-  </div>
-</div>
+              <div className="cashier-select-field mb-5">
+                <h5 className="text-[15px] text-heading font-semibold mb-3">
+                  {" "}
+                  Name (Russian)
+                </h5>
+                <div className="cashier-input-field-style">
+                  <div className="single-input-field w-full">
+                    <input
+                      type="text"
+                      placeholder="Name (Russian)"
+                      {...register("name_ru", {
+                        required: "Name (Russian) is required",
+                      })}
+                    />
+                    {errors.name_ru && (
+                      <span>{errors.name_ru.message}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 md:col-span-6 col-span-12">
+              <div className="cashier-select-field mb-5">
+                <h5 className="text-[15px] text-heading font-semibold mb-3">
+                  {" "}
+                  Name (Turk)
+                </h5>
+                <div className="cashier-input-field-style">
+                  <div className="single-input-field w-full">
+                    <input
+                      type="text"
+                      placeholder="Name (Turk)"
+                      {...register("name_tr", {
+                        required: "Name (Turk) is required",
+                      })}
+                    />
+                    {errors.name_tr && (
+                      <span>{errors.name_tr.message}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
             <div className="col-span-12">
