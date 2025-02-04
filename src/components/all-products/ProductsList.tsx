@@ -36,7 +36,7 @@ const ProductsList = () => {
     if (user?.phone_number) {
       axios
         .delete(
-          `${apiUrl}/products/${id}`,
+          `${apiUrl}/prods/${id}`,
           header
         )
         .then((res) => {
@@ -76,7 +76,7 @@ const ProductsList = () => {
   useEffect(() => {
     axios
       .get(
-        `${apiUrl}/products`
+        `${apiUrl}/prods`
       )
       .then((res) => { 
         setProducts(res.data.data);
@@ -159,9 +159,7 @@ const ProductsList = () => {
                           <div className="cashier-salereturns-table-dateF ml-5">
                             <span> {item.title_uz} </span>
                           </div> 
-                          {/* <div className="cashier-salereturns-table-customerF ">
-                            <span>{item.text_uz}</span>
-                          </div> */}
+                    
                        
                           <div className="cashier-salereturns-table-actionF">
                             <div className="dropdown">
