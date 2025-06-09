@@ -76,7 +76,7 @@ const ProductsList = () => {
   useEffect(() => {
     axios
       .get(
-        `${apiUrl}/prods`
+        `${apiUrl}/prods?limit=1000`
       )
       .then((res) => { 
         setProducts(res.data.data);

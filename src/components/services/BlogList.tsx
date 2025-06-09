@@ -82,7 +82,7 @@ const BlogList = () => {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}/hotels `)
+      .get(`${apiUrl}/hotels?limit=1000`)
       .then((res) => { 
         setBlogs(res.data.data);
         setotalPages(res.data.totalPages);

@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import useGlobalContext from "@/hooks/use-context";
 import apiUrl from "@/utils/api";
+import { useRouter } from "next/navigation";
 
 
 
@@ -27,6 +28,7 @@ interface FormData {
 
 const CreateServiceMain = () => {
   const [blogs, setBlogs] = useState([]);
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -70,6 +72,7 @@ const CreateServiceMain = () => {
               position: "top-left",
             });
             reset();
+            router.push("/products")
             break;
           case "custom error":
             reset();

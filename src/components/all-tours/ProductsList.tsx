@@ -67,7 +67,7 @@ const ProductsList = () => {
   useEffect(() => {
     axios
       .get(
-        `${apiUrl}/subtours`
+        `${apiUrl}/subtours?limit=1000`
       )
       .then((res) => { 
         setProducts(res.data.data);
